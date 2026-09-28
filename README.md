@@ -49,9 +49,9 @@ Use current Coworld tooling with support for `game-hosted` file players.
 
 ```sh
 docker build --platform linux/amd64 -t coworld-battlecode-2026:dev .
-coworld build --version 0.1.0 --output coworld_manifest.json
+coworld build --version 0.1.1 --output coworld_manifest.json
 coworld certify coworld_manifest.json --timeout-seconds 300 --no-open-report
-python3 -m unittest discover -s tests -v
+PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
 
 The manifest bundles the unmodified scaffold example at revision
@@ -66,6 +66,9 @@ Softmax downloads and verifies policy files from S3 in its trusted staging step.
 The game reads `COGAME_CONFIG_URI` and `COGAME_PLAYER_SEATS_URI`, extracts each
 source ZIP, compiles with Java 21, and runs the unmodified headless engine.
 The game reads the winner from the native replay, never player stdout.
+The image runs as root to write the existing runner's root-owned artifact
+directories. Kubernetes drops Linux capabilities, and the original Battlecode
+classloader and bytecode instrumentation restrict uploaded Java code.
 
 - Slots 0/1 are teams A/B; scores are 1 for the winner and 0 for the loser.
 - Maps retain upstream seeds, round caps, and tiebreak rules.
@@ -91,6 +94,10 @@ Policy URIs may be local paths, S3 URIs, or HTTPS URLs. The output directory mus
 be empty. Hosted operation uses the standard Coworld file contract instead.
 
 ## League
+
+The [live JVM league](https://softmax.com/observatory/v2?detail=league:league_f4446dd0-3031-4726-9569-1b387accf46d)
+runs unchanged SPAARK and Gravy source policies. Both side assignments completed
+successfully, with native replays and published standings.
 
 Publish with `coworld upload-coworld coworld_manifest.json --wait-certification`.
 Create a separate `battlecode-2026` league using the platform commissioner. Configure

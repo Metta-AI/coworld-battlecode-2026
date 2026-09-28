@@ -16,5 +16,59 @@ source-file policies on the existing Kubernetes infrastructure.
   game-hosted episode and WebSocket Ping/Pong. Tooling source revision:
   `18b4a69bdffbb9efa8c3577ebd4a3f41a534f30e`.
 
-Hosted identifiers and league evidence will be added after registration and the
-first completed hosted round. Local success alone does not establish deployment.
+## Hosted deployment (2026-09-28)
+
+- Coworld: `battlecode-2026:0.1.1`, canonical and certified.
+- Coworld ID: `cow_b200bacd-e82f-4855-9351-8771cf08c7f1`.
+- Image: `public.ecr.aws/q5f4m8t9/cogames@sha256:99368c96fab7e184a7324b00ec5406e9229bdb91d15bb7c65d58ee8c60eea913`.
+- Source revision for the deployed runtime: `ce45207`.
+- All ten hosted certification checks passed, including replay loading.
+- Five hosted smoke episodes completed successfully. Example:
+  `ereq_77270d7e-0316-49db-acee-cdcf5357b569` (1,310 rounds).
+- The initial 0.1.0 hosted smoke exposed root-owned artifact directories. With
+  explicit user approval, 0.1.1 runs as root to match the existing runner contract.
+  No platform code changed; Kubernetes drops capabilities and Battlecode retains
+  its original Java sandbox and compute instrumentation.
+
+## League and source policies
+
+[Battlecode 2026 — Original JVM](https://softmax.com/observatory/v2?detail=league:league_f4446dd0-3031-4726-9569-1b387accf46d)
+
+- League: `league_f4446dd0-3031-4726-9569-1b387accf46d`.
+- Competition division: `div_5a1c0582-a359-45a1-a6a5-603627881c52`.
+- Seed: `lseed_ea3265ac-3a64-4231-80ce-0d0bab7c30b6`, key `original-jvm`.
+- Enabled platform ladder, `team_pair` with both side assignments, Elo ranking,
+  no filler players, 288-minute cadence, $15/day budget.
+- Workflow: `ladder-league_f4446dd0-3031-4726-9569-1b387accf46d`.
+
+| Archive | Uploaded policy | Immutable policy version | Active champion membership |
+| --- | --- | --- | --- |
+| SPAARK | `battlecode-2026-spaark:v1` | `551a08b3-ce36-4901-84f9-cc32a3306206` | `lpm_502810f3-d683-4cbf-a927-5c0502259c5d` |
+| Gravy | `battlecode-2026-gravy:v1` | `79b76c5f-2a6d-4a3b-acf6-03c583ddb12e` | `lpm_36c41c31-05f1-4d7a-95e3-1e1c70c48e3d` |
+
+SPAARK uses player `ply_ca7b13c0-8e78-4e49-8f87-e6bcab971000`; Gravy uses the
+account's existing player `ply_305f0175-65a2-47ca-9566-69991871b743`. The account
+has a two-active-player limit. No existing player was renamed and no other league
+was modified. Both submissions are placed, competing, active, and champions.
+Archive revisions and entrypoint packages are pinned in `players/archives.json`.
+
+First round: `round_a0367d74-d443-4257-a97d-6e9139ec5d32`.
+Completed at `2026-09-28T22:49:58.976854Z`, with no failures.
+
+| Team A | Team B | Winner | Rounds | Episode request |
+| --- | --- | --- | --- | --- |
+| SPAARK | Gravy | Gravy | 219 | `ereq_ed1b3595-e501-466b-87a8-9246e9631e36` |
+| Gravy | SPAARK | Gravy | 182 | `ereq_34bfdefb-0859-4b6d-a23e-c0aa23244d90` |
+
+Published standings after this round: Gravy 1530.5305, SPAARK 1469.4695.
+Both native replays were downloaded and parsed again with the upstream FlatBuffers
+schema; their winners, rounds, and scores agree with the hosted results.
+Both results report the pinned engine revision and the expected unchanged ZIP hashes:
+
+- SPAARK: `7cc5fda375c7fcb5d97657b0bbdf7d6507d21475534323ebac0f92bf97b52e04`.
+- Gravy: `03252061df0a9d8b9ccd926de66caca1a78fadae0962dd33a3dd336291d436f0`.
+
+The league remains enabled and unpaused at the configured 288-minute cadence.
+The next scheduled round was not waited for; the completed round verifies the
+platform workflow, source staging, compilation, JVM play, replay storage, and
+leaderboard settlement end to end.
