@@ -1,0 +1,16 @@
+[
+  {
+    "name": "SPAARK",
+    "repository": "https://github.com/battlecode-archive/2026-SPAARK.git",
+    "revision": "a16431207623fa18c30e29b1ddf01e43276f31a1",
+    "source_directory": "src",
+    "package": "SPAARK"
+  },
+  {
+    "name": "Gravy",
+    "repository": "https://github.com/battlecode-archive/2026-Gravy.git",
+    "revision": "f9c268abc53d235b09a767c407300ecdad66bfbf",
+    "source_directory": "src",
+    "package": "testplayer"
+  }
+]

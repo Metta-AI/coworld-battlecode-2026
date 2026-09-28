@@ -1,0 +1,176 @@
+{
+  "tags": [
+    "strategy",
+    "programming",
+    "battlecode"
+  ],
+  "game": {
+    "name": "battlecode-2026",
+    "description": "MIT Battlecode 2026 with the original Java 21 engine, maps, rules, and per-robot bytecode budgets.",
+    "owner": "Metta-AI",
+    "player_runtime": "game-hosted",
+    "runnable": {
+      "type": "game",
+      "image": "{{GAME_IMAGE}}",
+      "run": [
+        "battlecode2026",
+        "serve"
+      ],
+      "source_url": "https://github.com/Metta-AI/coworld-battlecode-2026",
+      "resources": {
+        "requests": {
+          "cpu": "2",
+          "memory": "4Gi",
+          "ephemeral-storage": "4Gi"
+        },
+        "limits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        }
+      }
+    },
+    "config_schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tokens"
+      ],
+      "properties": {
+        "tokens": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "map": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "default": "DefaultSmall"
+        }
+      }
+    },
+    "results_schema": {
+      "type": "object",
+      "required": [
+        "scores",
+        "winner_slot",
+        "rounds",
+        "win_type",
+        "map",
+        "packages",
+        "policy_sha256",
+        "engine_revision"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scores": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "enum": [
+              0,
+              1
+            ]
+          }
+        },
+        "winner_slot": {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "rounds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "win_type": {
+          "type": "integer"
+        },
+        "map": {
+          "type": "string"
+        },
+        "packages": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string"
+          }
+        },
+        "policy_sha256": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "engine_revision": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        }
+      }
+    },
+    "protocols": {
+      "player": {
+        "type": "text",
+        "value": "Submit a ZIP containing src/<package>/RobotPlayer.java and Java dependencies. Optional root battlecode.json selects {\"package\":\"SPAARK\"}; a single RobotPlayer is auto-detected. The original RobotController/Clock API executes inside the JVM with upstream instrumentation. No player WebSocket or separate container is used."
+      },
+      "global": {
+        "type": "text",
+        "value": "GET /client/global shows episode status and links to the original Battlecode replay viewer after completion. /global is a WebSocket sending JSON phase/result snapshots and answering Ping frames. This initial port does not stream live board frames. Replays are original gzip-compressed FlatBuffers .bc26 files."
+      }
+    },
+    "docs": {
+      "readme": {
+        "type": "text",
+        "value": "Battlecode 2026: Java 21 source policies run under the original JVM engine and per-robot bytecode limits. Upload a ZIP with src/; choose an entrypoint using battlecode.json when there are multiple RobotPlayer classes. See https://github.com/Metta-AI/coworld-battlecode-2026 for packaging and local testing, and https://releases.battlecode.org/specs/battlecode26/ for the original rules. Slots 0 and 1 are teams A and B. Winners receive 1, losers 0. Maps retain their original seeds, round caps and tiebreaks."
+      }
+    },
+    "replay_viewer": {
+      "bundle": "build/replay-viewer",
+      "replay_compression": "identity"
+    }
+  },
+  "player": [
+    {
+      "type": "player",
+      "id": "example",
+      "name": "Original example player",
+      "description": "Unmodified Battlecode 2026 scaffold examplefuncsplayer.",
+      "file": "players/example",
+      "source_url": "https://github.com/battlecode/battlecode26-scaffold/tree/f69e2ab872a0061c9d4a684aa1dd798a0829da85/src/examplefuncsplayer"
+    }
+  ],
+  "variants": [
+    {
+      "id": "default-small",
+      "name": "Default Small",
+      "description": "Upstream DefaultSmall map with original seed and round limit.",
+      "game_config": {
+        "map": "DefaultSmall"
+      }
+    }
+  ],
+  "certification": {
+    "game_config": {
+      "map": "DefaultSmall"
+    },
+    "players": [
+      {
+        "player_id": "example"
+      },
+      {
+        "player_id": "example"
+      }
+    ]
+  },
+  "episode_timeout_minutes": 60
+}

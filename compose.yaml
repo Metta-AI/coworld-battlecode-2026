@@ -1,0 +1,6 @@
+services:
+  game:
+    image: ${BATTLECODE_IMAGE:-coworld-battlecode-2026:dev}
+    platform: linux/amd64
+    build:
+      context: .
