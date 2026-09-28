@@ -32,8 +32,9 @@ WORKDIR /opt/runner
 COPY pyproject.toml README.md ./
 COPY src ./src
 RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel \
-    && pip3 install --no-cache-dir . && useradd --uid 10001 --create-home episode
-USER 10001:10001
+    && pip3 install --no-cache-dir .
+# The existing game-hosted runner stages root-owned output directories.
+# Match that contract; uploaded Java remains subject to Battlecode instrumentation.
 ENV BATTLECODE_HOME=/opt/battlecode PYTHONUNBUFFERED=1
 ENTRYPOINT ["battlecode2026"]
 CMD ["serve"]
