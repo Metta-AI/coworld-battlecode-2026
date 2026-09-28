@@ -49,7 +49,7 @@ Use current Coworld tooling with support for `game-hosted` file players.
 
 ```sh
 docker build --platform linux/amd64 -t coworld-battlecode-2026:dev .
-coworld build compose.yaml coworld_manifest_template.json 0.1.0 coworld_manifest.json
+coworld build --version 0.1.0 --output coworld_manifest.json
 coworld certify coworld_manifest.json --timeout-seconds 300 --no-open-report
 python3 -m unittest discover -s tests -v
 ```
