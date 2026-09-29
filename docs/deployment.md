@@ -118,3 +118,10 @@ membership IDs are in `players/uploaded_archives.json`.
 
 Validation round: `round_0c474371-416b-4945-99d9-d45e74e68eac` (42 mirrored pairings).
 The existing 288-minute cadence and $15/day budget remain in place.
+
+At the final upload verification checkpoint, 16/42 matches had completed with no
+failures, and every one of the seven bots had completed at least one hosted match.
+Each completed result was checked against its seat's selected package, immutable
+uploaded ZIP hash, and pinned engine revision, with a replay present. The rest of
+the round remained queued or running; full-round settlement was not yet verified.
+The league is enabled and unpaused with exactly seven active bot-owned champions.
