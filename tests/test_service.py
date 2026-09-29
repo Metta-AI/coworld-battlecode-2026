@@ -53,6 +53,23 @@ class HostedTests(unittest.TestCase):
             request["players"][1]["sha256"], self.seats["seats"][1]["content_hash"][7:]
         )
 
+    def test_submission_preferences_follow_seat_order(self):
+        self.config["player_options"] = [{"package": "SPAARK"}, {"package": "Delta"}]
+        request = seats_request(self.config, self.seats)
+        self.assertEqual(
+            [p["package"] for p in request["players"]], ["SPAARK", "Delta"]
+        )
+        self.config["player_options"].reverse()
+        request = seats_request(self.config, self.seats)
+        self.assertEqual(
+            [p["package"] for p in request["players"]], ["Delta", "SPAARK"]
+        )
+
+    def test_incomplete_submission_preferences_rejected(self):
+        self.config["player_options"] = [{"package": "SPAARK"}]
+        with self.assertRaisesRegex(EpisodeError, "per seat"):
+            seats_request(self.config, self.seats)
+
     def test_bad_slot_order(self):
         self.seats["seats"].reverse()
         with self.assertRaisesRegex(EpisodeError, "ordered"):

@@ -119,6 +119,10 @@ def extract_sources(archive: Path, destination: Path, package: str | None) -> st
             if root and path.parts[: len(root)] != root:
                 continue
             relative = PurePosixPath(*path.parts[len(root) :])
+            # Some scaffold submissions bundle modified engine sources. Never
+            # compile those: the pinned engine remains the only Battlecode API.
+            if relative.parts[0] == "battlecode":
+                continue
             if relative.parts[0] in RESERVED:
                 raise EpisodeError(
                     "Source uses a reserved engine/runtime namespace", "player_error"

@@ -49,6 +49,21 @@
           "type": "string",
           "pattern": "^[A-Za-z0-9_-]+$",
           "default": "DefaultSmall"
+        },
+        "player_options": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "package": {
+                "type": "string",
+                "pattern": "^[A-Za-z_$][A-Za-z0-9_$]*(\\.[A-Za-z_$][A-Za-z0-9_$]*)*$"
+              }
+            }
+          }
         }
       }
     },

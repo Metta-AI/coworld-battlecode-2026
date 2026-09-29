@@ -10,38 +10,66 @@ and cumulative 20-minute team execution limits are unchanged. The outer JVM
 watchdog is 50 minutes and the hosted episode limit is 60 minutes, allowing both
 teams' legal execution time plus compilation and engine overhead.
 
-## Upload an existing player
+## Upload your player
 
-Upload a ZIP containing `src/<package>/RobotPlayer.java` and its Java dependencies.
-The original scaffold's `zipForSubmit` output (packages at ZIP root) also works.
-A single `RobotPlayer.java` is detected automatically. For a repository containing
-multiple historical players, add `battlecode.json` at the ZIP root:
+From your Battlecode 2026 scaffold directory, build **`submission.zip`** with
+Java 21 and the original **`zipForSubmit`** task. Upload the ZIP unchanged; no
+player code changes, Dockerfile, or extra metadata are required.
 
-```json
-{"package": "SPAARK"}
-```
-
-The helper packages unchanged Java sources and writes that metadata:
+Install the Softmax CLI with [uv](https://docs.astral.sh/uv/getting-started/installation/)
+and sign in:
 
 ```sh
-python3 -m pip install -e .
-battlecode2026 pack /path/to/2026-SPAARK --package SPAARK --output spaark.zip
-coworld upload-policy --file spaark.zip --name battlecode-2026-spaark
+uv venv --python 3.12 .venv-softmax
+uv pip install --python .venv-softmax/bin/python 'coworld[auth]'
+source .venv-softmax/bin/activate
+softmax login
+coworld player list
 ```
 
-Select the intended Softmax player identity before uploading. Submit the exact
-returned policy version to the Battlecode 2026 JVM league. Each seat compiles into
-its own directory, so opposing policies may use identical package names.
-Only the selected entrypoint and referenced Java sources are compiled. Uploaded
-Gradle scripts, annotation processors, and precompiled classes are not executed.
-This initial port supports Java source, not Scala or Python players. ZIPs are
-limited to 32 MiB compressed, 128 MiB expanded, and 10,000 entries.
-
-Reproduce the two archived imports, with pinned commits and SHA-256 provenance:
+Select your player ID from that list, then build, upload, and submit:
 
 ```sh
-PYTHONPATH=src python3 scripts/import_players.py
+coworld player use ply_YOUR_PLAYER_ID
+bash ./gradlew --no-daemon zipForSubmit
+coworld upload-policy --file submission.zip --name "My Battlecode Player"
+coworld submit "My Battlecode Player:v1" \
+  --league league_f4446dd0-3031-4726-9569-1b387accf46d \
+  --preference package=myplayer
 ```
+
+Replace `myplayer` with the case-sensitive Java package containing your
+`RobotPlayer` class, and use the policy version returned by the upload. Select
+your identity before uploading: the policy is bound to that player. To update it,
+repeat the build/upload/submit steps with the new version. Matches and leaderboard
+updates happen asynchronously. `coworld player unset` returns to your account identity.
+
+If you only have Java sources, put your package and dependencies in the
+[official scaffold](https://github.com/battlecode/battlecode26-scaffold)'s `src/`
+directory first. Multiple packages can remain in the ZIP; the submission's
+`package` preference chooses which one runs. Only Java source is supported;
+ZIP limits are 32 MiB compressed, 128 MiB expanded, and 10,000 entries.
+
+## Reproduce the default policies
+
+With Python 3, Git, and Docker installed, run from this repository:
+
+```sh
+python3 scripts/build_submissions.py
+```
+
+This checks out the seven revisions in `players/archives.json`, runs their
+original `zipForSubmit` tasks in Java 21 containers, and copies the untouched ZIPs
+to `artifacts/scaffold-policies/<Name>.zip`. Build logs and `provenance.json` record
+the sources, ZIP hashes, and scaffold repairs. ZIP timestamps can vary across builds.
+Old-But-Gold uses the official scaffold; missing scaffold support files are
+restored for Gravy and SPAARK. No player Java source is edited.
+
+Upload any resulting ZIP under your own player with the commands above, using
+its package from `players/archives.json` (for example, `SPAARK.zip` and
+`--preference package=SPAARK`). ProofOfConcept uses `result_408`, the later-numbered
+exported result; its archive does not identify the final tournament entrypoint.
+The build helper does not upload policies or change the live league.
 
 ## Build and verify
 
@@ -49,7 +77,7 @@ Use current Coworld tooling with support for `game-hosted` file players.
 
 ```sh
 docker build --platform linux/amd64 -t coworld-battlecode-2026:dev .
-coworld build --version 0.1.1 --output coworld_manifest.json
+coworld build --version 0.1.2 --output coworld_manifest.json
 coworld certify coworld_manifest.json --timeout-seconds 300 --no-open-report
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
@@ -66,6 +94,8 @@ Softmax downloads and verifies policy files from S3 in its trusted staging step.
 The game reads `COGAME_CONFIG_URI` and `COGAME_PLAYER_SEATS_URI`, extracts each
 source ZIP, compiles with Java 21, and runs the unmodified headless engine.
 The game reads the winner from the native replay, never player stdout.
+Bundled `battlecode/` sources are ignored so archived engine modifications cannot
+replace the pinned official engine.
 The image runs as root to write the existing runner's root-owned artifact
 directories. Kubernetes drops Linux capabilities, and the original Battlecode
 classloader and bytecode instrumentation restrict uploaded Java code.
@@ -96,8 +126,9 @@ be empty. Hosted operation uses the standard Coworld file contract instead.
 ## League
 
 The [live JVM league](https://softmax.com/observatory/v2?detail=league:league_f4446dd0-3031-4726-9569-1b387accf46d)
-runs unchanged SPAARK and Gravy source policies. Both side assignments completed
-successfully, with native replays and published standings.
+runs all seven 2026 archive candidates under dedicated Coworld-owned bot identities.
+These platform bots are separate from human accounts. The original two account-owned
+entries have been retired from this league; their history remains available.
 
 Publish with `coworld upload-coworld coworld_manifest.json --wait-certification`.
 Create a separate `battlecode-2026` league using the platform commissioner. Configure
