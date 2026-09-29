@@ -12,10 +12,25 @@ teams' legal execution time plus compilation and engine overhead.
 
 ## Upload your player
 
-Build your existing scaffold's **`zipForSubmit`** task and upload the resulting
-**`submission.zip`** unchanged:
+From your Battlecode 2026 scaffold directory, build **`submission.zip`** with
+Java 21 and the original **`zipForSubmit`** task. Upload the ZIP unchanged; no
+player code changes, Dockerfile, or extra metadata are required.
+
+Install the Softmax CLI with [uv](https://docs.astral.sh/uv/getting-started/installation/)
+and sign in:
 
 ```sh
+uv venv --python 3.12 .venv-softmax
+uv pip install --python .venv-softmax/bin/python 'coworld[auth]'
+source .venv-softmax/bin/activate
+softmax login
+coworld player list
+```
+
+Select your player ID from that list, then build, upload, and submit:
+
+```sh
+coworld player use ply_YOUR_PLAYER_ID
 bash ./gradlew --no-daemon zipForSubmit
 coworld upload-policy --file submission.zip --name "My Battlecode Player"
 coworld submit "My Battlecode Player:v1" \
@@ -23,24 +38,38 @@ coworld submit "My Battlecode Player:v1" \
   --preference package=myplayer
 ```
 
-Use the version returned by the upload and replace `myplayer` with your Java
-package. Select your player identity before uploading.
-**[Follow the full upload guide](docs/upload-player.md)** for installation, login,
-player selection, source-only repositories, updates, and submission checks.
-No player code changes, policy container, or ZIP metadata are required.
+Replace `myplayer` with the case-sensitive Java package containing your
+`RobotPlayer` class, and use the policy version returned by the upload. Select
+your identity before uploading: the policy is bound to that player. To update it,
+repeat the build/upload/submit steps with the new version. Matches and leaderboard
+updates happen asynchronously. `coworld player unset` returns to your account identity.
 
-For direct episodes, set `game_config_overrides.player_options` to an ordered
-array such as `[{"package":"SPAARK"},{"package":"Delta"}]`.
-Each seat compiles into its own directory, so opposing policies may use identical
-package names. A single `RobotPlayer.java` is detected automatically.
+If you only have Java sources, put your package and dependencies in the
+[official scaffold](https://github.com/battlecode/battlecode26-scaffold)'s `src/`
+directory first. Multiple packages can remain in the ZIP; the submission's
+`package` preference chooses which one runs. Only Java source is supported;
+ZIP limits are 32 MiB compressed, 128 MiB expanded, and 10,000 entries.
 
-To reproduce the seven archived baseline submissions, run
-`python3 scripts/build_submissions.py`. The helper restores missing scaffold
-support files and runs the original `zipForSubmit` tasks without editing player
-Java source or repacking the generated ZIPs. See `players/archives.json` for
-pinned sources and `players/uploaded_archives.json` for deployed IDs and hashes.
-The optional `battlecode2026 pack` command and `scripts/import_players.py` can
-instead package sources with `battlecode.json` entrypoint metadata.
+## Reproduce the default policies
+
+With Python 3, Git, and Docker installed, run from this repository:
+
+```sh
+python3 scripts/build_submissions.py
+```
+
+This checks out the seven revisions in `players/archives.json`, runs their
+original `zipForSubmit` tasks in Java 21 containers, and copies the untouched ZIPs
+to `artifacts/scaffold-policies/<Name>.zip`. Build logs and `provenance.json` record
+the sources, ZIP hashes, and scaffold repairs. ZIP timestamps can vary across builds.
+Old-But-Gold uses the official scaffold; missing scaffold support files are
+restored for Gravy and SPAARK. No player Java source is edited.
+
+Upload any resulting ZIP under your own player with the commands above, using
+its package from `players/archives.json` (for example, `SPAARK.zip` and
+`--preference package=SPAARK`). ProofOfConcept uses `result_408`, the later-numbered
+exported result; its archive does not identify the final tournament entrypoint.
+The build helper does not upload policies or change the live league.
 
 ## Build and verify
 
