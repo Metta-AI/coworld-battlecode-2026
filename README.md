@@ -13,7 +13,17 @@ teams' legal execution time plus compilation and engine overhead.
 ## Upload an existing player
 
 Upload a ZIP containing `src/<package>/RobotPlayer.java` and its Java dependencies.
-The original scaffold's `zipForSubmit` output (packages at ZIP root) also works.
+The original scaffold's `zipForSubmit` output (packages at ZIP root) uploads unchanged.
+For a ZIP containing multiple bots, select the package at league submission time:
+
+```sh
+coworld submit POLICY:v1 --league league_f4446dd0-3031-4726-9569-1b387accf46d \
+  --preference package=SPAARK
+```
+
+The league passes that preference into the matching seat's `player_options`.
+For direct episodes, set `game_config_overrides.player_options` to an ordered
+array such as `[{"package":"SPAARK"},{"package":"Delta"}]`.
 A single `RobotPlayer.java` is detected automatically. For a repository containing
 multiple historical players, add `battlecode.json` at the ZIP root:
 
@@ -37,11 +47,18 @@ Gradle scripts, annotation processors, and precompiled classes are not executed.
 This initial port supports Java source, not Scala or Python players. ZIPs are
 limited to 32 MiB compressed, 128 MiB expanded, and 10,000 entries.
 
-Reproduce the two archived imports, with pinned commits and SHA-256 provenance:
+Build all seven archived submissions with their original `zipForSubmit` tasks:
 
 ```sh
-PYTHONPATH=src python3 scripts/import_players.py
+python3 scripts/build_submissions.py
 ```
+
+The source-only Old But Gold archive uses the pinned official scaffold. Gravy
+and SPAARK omit scaffold support files; the build helper restores those files.
+No Java source is edited, and the generated ZIP is uploaded without metadata
+injection or repacking. Immutable bot IDs and ZIP hashes are recorded in
+`players/uploaded_archives.json`. `scripts/import_players.py` remains available
+for the optional source-plus-metadata packaging format.
 
 ## Build and verify
 
@@ -49,7 +66,7 @@ Use current Coworld tooling with support for `game-hosted` file players.
 
 ```sh
 docker build --platform linux/amd64 -t coworld-battlecode-2026:dev .
-coworld build --version 0.1.1 --output coworld_manifest.json
+coworld build --version 0.1.2 --output coworld_manifest.json
 coworld certify coworld_manifest.json --timeout-seconds 300 --no-open-report
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
@@ -66,6 +83,8 @@ Softmax downloads and verifies policy files from S3 in its trusted staging step.
 The game reads `COGAME_CONFIG_URI` and `COGAME_PLAYER_SEATS_URI`, extracts each
 source ZIP, compiles with Java 21, and runs the unmodified headless engine.
 The game reads the winner from the native replay, never player stdout.
+Bundled `battlecode/` sources are ignored so archived engine modifications cannot
+replace the pinned official engine.
 The image runs as root to write the existing runner's root-owned artifact
 directories. Kubernetes drops Linux capabilities, and the original Battlecode
 classloader and bytecode instrumentation restrict uploaded Java code.
@@ -96,8 +115,9 @@ be empty. Hosted operation uses the standard Coworld file contract instead.
 ## League
 
 The [live JVM league](https://softmax.com/observatory/v2?detail=league:league_f4446dd0-3031-4726-9569-1b387accf46d)
-runs unchanged SPAARK and Gravy source policies. Both side assignments completed
-successfully, with native replays and published standings.
+runs all seven 2026 archive candidates under dedicated Coworld-owned bot identities.
+These platform bots are separate from human accounts. The original two account-owned
+entries have been retired from this league; their history remains available.
 
 Publish with `coworld upload-coworld coworld_manifest.json --wait-certification`.
 Create a separate `battlecode-2026` league using the platform commissioner. Configure

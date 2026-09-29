@@ -49,7 +49,8 @@ source-file policies on the existing Kubernetes infrastructure.
 SPAARK uses player `ply_ca7b13c0-8e78-4e49-8f87-e6bcab971000`; Gravy uses the
 account's existing player `ply_305f0175-65a2-47ca-9566-69991871b743`. The account
 has a two-active-player limit. No existing player was renamed and no other league
-was modified. Both submissions are placed, competing, active, and champions.
+was modified. Both original submissions were placed and verified as champions. They were later
+retired when the seven Coworld-owned archive bots replaced the account-owned roster.
 Archive revisions and entrypoint packages are pinned in `players/archives.json`.
 
 First round: `round_a0367d74-d443-4257-a97d-6e9139ec5d32`.
@@ -72,3 +73,48 @@ The league remains enabled and unpaused at the configured 288-minute cadence.
 The next scheduled round was not waited for; the completed round verifies the
 platform workflow, source staging, compilation, JVM play, replay storage, and
 leaderboard settlement end to end.
+
+
+## Seven archive bots (0.1.2)
+
+Coworld `cow_af679116-681e-46c2-b3c7-0d2c73d6ff66` is canonical and passed all ten
+hosted certification checks plus five hosted smoke episodes. The game accepts
+per-seat `player_options` from `scheduler.entrant_preferences_field`, with each
+league submission specifying its `package`. This keeps `submission.zip` unchanged.
+Bundled engine source under `battlecode/` is ignored; only the pinned original
+engine supplies those classes.
+
+All seven original scaffold outputs were uploaded without changing their bytes.
+Their Java entries were compared byte-for-byte to the pinned archive sources.
+All selected players compile against the original engine. The Complex Merlin
+exceeded the local x86 emulation compiler timeout but passed on native hardware.
+
+| Archive | Selected package | Policy |
+| --- | --- | --- |
+| Gravy | `testplayer` | `battlecode-2026-archive-gravy:v1` |
+| Old-But-Gold | `basic51` | `battlecode-2026-archive-old-but-gold:v1` |
+| Powerpuff-Girls | `Finals` | `battlecode-2026-archive-powerpuff-girls:v1` |
+| ProofOfConcept | `result_408` | `battlecode-2026-archive-proofofconcept:v1` |
+| SPAARK | `SPAARK` | `battlecode-2026-archive-spaark:v1` |
+| The-Complex-Merlin | `TheComplexMerlin` | `battlecode-2026-archive-the-complex-merlin:v1` |
+| TSPAARK | `Delta` | `battlecode-2026-archive-tspaark:v1` |
+
+ProofOfConcept does not identify its final tournament entrypoint; `result_408` is
+selected as the later-numbered exported result. The ZIP also retains its other
+packages, so the selection can change without repacking or uploading new bytes.
+
+Old But Gold has no scaffold; its unchanged source tree was placed in the pinned
+official scaffold's `src/` directory. Gravy omits engine/client version files and
+SPAARK omits the Gradle wrapper JAR; those scaffold support files were restored.
+The archives' player code and their original `zipForSubmit` tasks were not edited.
+The reproducible build procedure is `scripts/build_submissions.py`.
+
+Every new player and policy is owned by `battlecode-2026`, using the supported
+team ownership APIs. These are platform bot identities, separate from the user's
+players and excluded from player rewards. The original two league memberships
+were retired, retaining their history. Credentials were not changed.
+Immutable identities, source commits, artifact hashes, submission IDs, and
+membership IDs are in `players/uploaded_archives.json`.
+
+Validation round: `round_0c474371-416b-4945-99d9-d45e74e68eac` (42 mirrored pairings).
+The existing 288-minute cadence and $15/day budget remain in place.

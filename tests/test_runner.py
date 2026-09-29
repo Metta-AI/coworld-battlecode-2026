@@ -130,6 +130,8 @@ class SourceTests(unittest.TestCase):
             "bot",
         )
 
+        self.assertFalse((self.root / "source" / "battlecode").exists())
+
     def test_size_limits(self):
         with (
             patch("battlecode2026.runner.MAX_SOURCE", 3),
