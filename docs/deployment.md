@@ -91,13 +91,13 @@ exceeded the local x86 emulation compiler timeout but passed on native hardware.
 
 | Archive | Selected package | Policy |
 | --- | --- | --- |
-| Gravy | `testplayer` | `battlecode-2026-archive-gravy:v1` |
-| Old-But-Gold | `basic51` | `battlecode-2026-archive-old-but-gold:v1` |
-| Powerpuff-Girls | `Finals` | `battlecode-2026-archive-powerpuff-girls:v1` |
-| ProofOfConcept | `result_408` | `battlecode-2026-archive-proofofconcept:v1` |
-| SPAARK | `SPAARK` | `battlecode-2026-archive-spaark:v1` |
-| The-Complex-Merlin | `TheComplexMerlin` | `battlecode-2026-archive-the-complex-merlin:v1` |
-| TSPAARK | `Delta` | `battlecode-2026-archive-tspaark:v1` |
+| Gravy | `testplayer` | `Gravy (battlecode-2026-archive):v1` |
+| Old-But-Gold | `basic51` | `Old-But-Gold (battlecode-2026-archive):v1` |
+| Powerpuff-Girls | `Finals` | `Powerpuff-Girls (battlecode-2026-archive):v1` |
+| ProofOfConcept | `result_408` | `ProofOfConcept (battlecode-2026-archive):v1` |
+| SPAARK | `SPAARK` | `SPAARK (battlecode-2026-archive):v1` |
+| The-Complex-Merlin | `TheComplexMerlin` | `The-Complex-Merlin (battlecode-2026-archive):v1` |
+| TSPAARK | `Delta` | `TSPAARK (battlecode-2026-archive):v1` |
 
 ProofOfConcept does not identify its final tournament entrypoint; `result_408` is
 selected as the later-numbered exported result. The ZIP also retains its other
@@ -119,9 +119,19 @@ membership IDs are in `players/uploaded_archives.json`.
 Validation round: `round_0c474371-416b-4945-99d9-d45e74e68eac` (42 mirrored pairings).
 The existing 288-minute cadence and $15/day budget remain in place.
 
-At the final upload verification checkpoint, 16/42 matches had completed with no
-failures, and every one of the seven bots had completed at least one hosted match.
-Each completed result was checked against its seat's selected package, immutable
-uploaded ZIP hash, and pinned engine revision, with a replay present. The rest of
-the round remained queued or running; full-round settlement was not yet verified.
-The league is enabled and unpaused with exactly seven active bot-owned champions.
+All 42 matches completed without failures. Every result was checked against its
+seat's selected package, immutable uploaded ZIP hash, and pinned engine revision,
+with a replay present. `players/archive_validation.json` records this completed
+validation of the original seven-bot roster, before the naming replacement below.
+
+## Readable archive names
+
+The seven bot-owned players and policies were recreated with the shared naming
+format `<TeamName> (battlecode-2026-archive)` so truncated columns show the team
+first. The original ZIP bytes and package preferences were reused. The seven
+previous memberships were retired; `players/uploaded_archives.json` records the
+replacement identities. The league remains enabled and unpaused, with the same
+cadence and budget.
+
+A new round, `round_bddb222c-73ff-4ca4-941e-5a43163fa814`, was triggered to publish
+the replacement roster in the leaderboard.

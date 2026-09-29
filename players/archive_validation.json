@@ -1,11 +1,9 @@
 {
   "round_id": "round_0c474371-416b-4945-99d9-d45e74e68eac",
-  "status": "pending",
+  "status": "completed",
   "error": null,
   "episode_counts": {
-    "pending": 18,
-    "running": 8,
-    "completed": 16
+    "completed": 42
   },
   "verified_players": [
     "Gravy",
