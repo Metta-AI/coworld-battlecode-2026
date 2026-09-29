@@ -10,55 +10,37 @@ and cumulative 20-minute team execution limits are unchanged. The outer JVM
 watchdog is 50 minutes and the hosted episode limit is 60 minutes, allowing both
 teams' legal execution time plus compilation and engine overhead.
 
-## Upload an existing player
+## Upload your player
 
-Upload a ZIP containing `src/<package>/RobotPlayer.java` and its Java dependencies.
-The original scaffold's `zipForSubmit` output (packages at ZIP root) uploads unchanged.
-For a ZIP containing multiple bots, select the package at league submission time:
+Build your existing scaffold's **`zipForSubmit`** task and upload the resulting
+**`submission.zip`** unchanged:
 
 ```sh
-coworld submit POLICY:v1 --league league_f4446dd0-3031-4726-9569-1b387accf46d \
-  --preference package=SPAARK
+bash ./gradlew --no-daemon zipForSubmit
+coworld upload-policy --file submission.zip --name "My Battlecode Player"
+coworld submit "My Battlecode Player:v1" \
+  --league league_f4446dd0-3031-4726-9569-1b387accf46d \
+  --preference package=myplayer
 ```
 
-The league passes that preference into the matching seat's `player_options`.
+Use the version returned by the upload and replace `myplayer` with your Java
+package. Select your player identity before uploading.
+**[Follow the full upload guide](docs/upload-player.md)** for installation, login,
+player selection, source-only repositories, updates, and submission checks.
+No player code changes, policy container, or ZIP metadata are required.
+
 For direct episodes, set `game_config_overrides.player_options` to an ordered
 array such as `[{"package":"SPAARK"},{"package":"Delta"}]`.
-A single `RobotPlayer.java` is detected automatically. For a repository containing
-multiple historical players, add `battlecode.json` at the ZIP root:
+Each seat compiles into its own directory, so opposing policies may use identical
+package names. A single `RobotPlayer.java` is detected automatically.
 
-```json
-{"package": "SPAARK"}
-```
-
-The helper packages unchanged Java sources and writes that metadata:
-
-```sh
-python3 -m pip install -e .
-battlecode2026 pack /path/to/2026-SPAARK --package SPAARK --output spaark.zip
-coworld upload-policy --file spaark.zip --name battlecode-2026-spaark
-```
-
-Select the intended Softmax player identity before uploading. Submit the exact
-returned policy version to the Battlecode 2026 JVM league. Each seat compiles into
-its own directory, so opposing policies may use identical package names.
-Only the selected entrypoint and referenced Java sources are compiled. Uploaded
-Gradle scripts, annotation processors, and precompiled classes are not executed.
-This initial port supports Java source, not Scala or Python players. ZIPs are
-limited to 32 MiB compressed, 128 MiB expanded, and 10,000 entries.
-
-Build all seven archived submissions with their original `zipForSubmit` tasks:
-
-```sh
-python3 scripts/build_submissions.py
-```
-
-The source-only Old But Gold archive uses the pinned official scaffold. Gravy
-and SPAARK omit scaffold support files; the build helper restores those files.
-No Java source is edited, and the generated ZIP is uploaded without metadata
-injection or repacking. Immutable bot IDs and ZIP hashes are recorded in
-`players/uploaded_archives.json`. `scripts/import_players.py` remains available
-for the optional source-plus-metadata packaging format.
+To reproduce the seven archived baseline submissions, run
+`python3 scripts/build_submissions.py`. The helper restores missing scaffold
+support files and runs the original `zipForSubmit` tasks without editing player
+Java source or repacking the generated ZIPs. See `players/archives.json` for
+pinned sources and `players/uploaded_archives.json` for deployed IDs and hashes.
+The optional `battlecode2026 pack` command and `scripts/import_players.py` can
+instead package sources with `battlecode.json` entrypoint metadata.
 
 ## Build and verify
 
