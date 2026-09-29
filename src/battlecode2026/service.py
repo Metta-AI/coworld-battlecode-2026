@@ -33,8 +33,21 @@ def seats_request(config: dict, document: dict) -> dict:
     seats = document.get("seats", [])
     if [s.get("slot") for s in seats] != [0, 1]:
         raise EpisodeError("Expected ordered seats 0 and 1")
-    if set(config) - {"map", "tokens"} or len(config.get("tokens", [])) != 2:
+    if (
+        set(config) - {"map", "tokens", "player_options"}
+        or len(config.get("tokens", [])) != 2
+    ):
         raise EpisodeError("Expected a map and two runner-injected tokens")
+    options = config.get("player_options", [{}, {}])
+    if (
+        not isinstance(options, list)
+        or len(options) != 2
+        or any(
+            not isinstance(option, dict) or set(option) - {"package"}
+            for option in options
+        )
+    ):
+        raise EpisodeError("Expected one player_options object per seat")
     players = []
     for seat in seats:
         path = file_path(seat["file_uri"])
@@ -46,7 +59,11 @@ def seats_request(config: dict, document: dict) -> dict:
         if not digest.startswith("sha256:"):
             raise EpisodeError("Expected a SHA-256 seat content hash")
         players.append(
-            {"uri": seat["file_uri"], "sha256": digest.removeprefix("sha256:")}
+            {
+                "uri": seat["file_uri"],
+                "sha256": digest.removeprefix("sha256:"),
+                **options[seat["slot"]],
+            }
         )
     return {
         "version": 1,

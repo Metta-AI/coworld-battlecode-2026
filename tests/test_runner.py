@@ -116,7 +116,19 @@ class SourceTests(unittest.TestCase):
 
     def test_reserved_namespace(self):
         with self.assertRaisesRegex(EpisodeError, "reserved"):
-            self.extract([("src/battlecode/common/RobotPlayer.java", "")])
+            self.extract([("src/java/common/RobotPlayer.java", "")])
+
+    def test_bundled_engine_sources_are_not_extracted(self):
+        self.assertEqual(
+            self.extract(
+                [
+                    ("bot/RobotPlayer.java", "package bot;"),
+                    ("battlecode/common/RobotPlayer.java", "invalid engine override"),
+                ],
+                "bot",
+            ),
+            "bot",
+        )
 
     def test_size_limits(self):
         with (
