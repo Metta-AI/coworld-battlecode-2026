@@ -172,6 +172,590 @@
       "game_config": {
         "map": "DefaultSmall"
       }
+    },
+    {
+      "id": "5t4rv4t10n-1337",
+      "name": "5t4rv4t10n_1337",
+      "game_config": {
+        "map": "5t4rv4t10n_1337"
+      },
+      "description": "Upstream 5t4rv4t10n_1337 map with original seed and round limit."
+    },
+    {
+      "id": "defaultlarge",
+      "name": "DefaultLarge",
+      "game_config": {
+        "map": "DefaultLarge"
+      },
+      "description": "Upstream DefaultLarge map with original seed and round limit."
+    },
+    {
+      "id": "defaultmedium",
+      "name": "DefaultMedium",
+      "game_config": {
+        "map": "DefaultMedium"
+      },
+      "description": "Upstream DefaultMedium map with original seed and round limit."
+    },
+    {
+      "id": "escapethenight",
+      "name": "EscapeTheNight",
+      "game_config": {
+        "map": "EscapeTheNight"
+      },
+      "description": "Upstream EscapeTheNight map with original seed and round limit."
+    },
+    {
+      "id": "excavation",
+      "name": "Excavation",
+      "game_config": {
+        "map": "Excavation"
+      },
+      "description": "Upstream Excavation map with original seed and round limit."
+    },
+    {
+      "id": "freethecheese",
+      "name": "FreeTheCheese",
+      "game_config": {
+        "map": "FreeTheCheese"
+      },
+      "description": "Upstream FreeTheCheese map with original seed and round limit."
+    },
+    {
+      "id": "hike",
+      "name": "Hike",
+      "game_config": {
+        "map": "Hike"
+      },
+      "description": "Upstream Hike map with original seed and round limit."
+    },
+    {
+      "id": "meow",
+      "name": "Meow",
+      "game_config": {
+        "map": "Meow"
+      },
+      "description": "Upstream Meow map with original seed and round limit."
+    },
+    {
+      "id": "nofreecheese",
+      "name": "Nofreecheese",
+      "game_config": {
+        "map": "Nofreecheese"
+      },
+      "description": "Upstream Nofreecheese map with original seed and round limit."
+    },
+    {
+      "id": "run",
+      "name": "RUN",
+      "game_config": {
+        "map": "RUN"
+      },
+      "description": "Upstream RUN map with original seed and round limit."
+    },
+    {
+      "id": "stash",
+      "name": "Stash",
+      "game_config": {
+        "map": "Stash"
+      },
+      "description": "Upstream Stash map with original seed and round limit."
+    },
+    {
+      "id": "theheist",
+      "name": "TheHeist",
+      "game_config": {
+        "map": "TheHeist"
+      },
+      "description": "Upstream TheHeist map with original seed and round limit."
+    },
+    {
+      "id": "uncomfortablyclose",
+      "name": "UncomfortablyClose",
+      "game_config": {
+        "map": "UncomfortablyClose"
+      },
+      "description": "Upstream UncomfortablyClose map with original seed and round limit."
+    },
+    {
+      "id": "zeroday",
+      "name": "ZeroDay",
+      "game_config": {
+        "map": "ZeroDay"
+      },
+      "description": "Upstream ZeroDay map with original seed and round limit."
+    },
+    {
+      "id": "arrows",
+      "name": "arrows",
+      "game_config": {
+        "map": "arrows"
+      },
+      "description": "Upstream arrows map with original seed and round limit."
+    },
+    {
+      "id": "attack-on-cat",
+      "name": "attack_on_cat",
+      "game_config": {
+        "map": "attack_on_cat"
+      },
+      "description": "Upstream attack_on_cat map with original seed and round limit."
+    },
+    {
+      "id": "averyfineline",
+      "name": "averyfineline",
+      "game_config": {
+        "map": "averyfineline"
+      },
+      "description": "Upstream averyfineline map with original seed and round limit."
+    },
+    {
+      "id": "averystrangespace",
+      "name": "averystrangespace",
+      "game_config": {
+        "map": "averystrangespace"
+      },
+      "description": "Upstream averystrangespace map with original seed and round limit."
+    },
+    {
+      "id": "bed",
+      "name": "bed",
+      "game_config": {
+        "map": "bed"
+      },
+      "description": "Upstream bed map with original seed and round limit."
+    },
+    {
+      "id": "canyoudig",
+      "name": "canyoudig",
+      "game_config": {
+        "map": "canyoudig"
+      },
+      "description": "Upstream canyoudig map with original seed and round limit."
+    },
+    {
+      "id": "cheesebottles",
+      "name": "cheesebottles",
+      "game_config": {
+        "map": "cheesebottles"
+      },
+      "description": "Upstream cheesebottles map with original seed and round limit."
+    },
+    {
+      "id": "cheesefarm",
+      "name": "cheesefarm",
+      "game_config": {
+        "map": "cheesefarm"
+      },
+      "description": "Upstream cheesefarm map with original seed and round limit."
+    },
+    {
+      "id": "cheeseguardians",
+      "name": "cheeseguardians",
+      "game_config": {
+        "map": "cheeseguardians"
+      },
+      "description": "Upstream cheeseguardians map with original seed and round limit."
+    },
+    {
+      "id": "clockwisdom",
+      "name": "clockwisdom",
+      "game_config": {
+        "map": "clockwisdom"
+      },
+      "description": "Upstream clockwisdom map with original seed and round limit."
+    },
+    {
+      "id": "closeup",
+      "name": "closeup",
+      "game_config": {
+        "map": "closeup"
+      },
+      "description": "Upstream closeup map with original seed and round limit."
+    },
+    {
+      "id": "clouds",
+      "name": "clouds",
+      "game_config": {
+        "map": "clouds"
+      },
+      "description": "Upstream clouds map with original seed and round limit."
+    },
+    {
+      "id": "constrictinglattice",
+      "name": "constrictinglattice",
+      "game_config": {
+        "map": "constrictinglattice"
+      },
+      "description": "Upstream constrictinglattice map with original seed and round limit."
+    },
+    {
+      "id": "corridorofdoomanddespair",
+      "name": "corridorofdoomanddespair",
+      "game_config": {
+        "map": "corridorofdoomanddespair"
+      },
+      "description": "Upstream corridorofdoomanddespair map with original seed and round limit."
+    },
+    {
+      "id": "diamond",
+      "name": "diamond",
+      "game_config": {
+        "map": "diamond"
+      },
+      "description": "Upstream diamond map with original seed and round limit."
+    },
+    {
+      "id": "dirtfulcat",
+      "name": "dirtfulcat",
+      "game_config": {
+        "map": "dirtfulcat"
+      },
+      "description": "Upstream dirtfulcat map with original seed and round limit."
+    },
+    {
+      "id": "dirtpassageway",
+      "name": "dirtpassageway",
+      "game_config": {
+        "map": "dirtpassageway"
+      },
+      "description": "Upstream dirtpassageway map with original seed and round limit."
+    },
+    {
+      "id": "evileye",
+      "name": "evileye",
+      "game_config": {
+        "map": "evileye"
+      },
+      "description": "Upstream evileye map with original seed and round limit."
+    },
+    {
+      "id": "externalsustenance",
+      "name": "externalsustenance",
+      "game_config": {
+        "map": "externalsustenance"
+      },
+      "description": "Upstream externalsustenance map with original seed and round limit."
+    },
+    {
+      "id": "fullofsecrets",
+      "name": "fullofsecrets",
+      "game_config": {
+        "map": "fullofsecrets"
+      },
+      "description": "Upstream fullofsecrets map with original seed and round limit."
+    },
+    {
+      "id": "gridlock",
+      "name": "gridlock",
+      "game_config": {
+        "map": "gridlock"
+      },
+      "description": "Upstream gridlock map with original seed and round limit."
+    },
+    {
+      "id": "groveisbeingdesecrated",
+      "name": "groveisbeingdesecrated",
+      "game_config": {
+        "map": "groveisbeingdesecrated"
+      },
+      "description": "Upstream groveisbeingdesecrated map with original seed and round limit."
+    },
+    {
+      "id": "hatefullattice",
+      "name": "hatefullattice",
+      "game_config": {
+        "map": "hatefullattice"
+      },
+      "description": "Upstream hatefullattice map with original seed and round limit."
+    },
+    {
+      "id": "heart",
+      "name": "heart",
+      "game_config": {
+        "map": "heart"
+      },
+      "description": "Upstream heart map with original seed and round limit."
+    },
+    {
+      "id": "houseofcards",
+      "name": "houseofcards",
+      "game_config": {
+        "map": "houseofcards"
+      },
+      "description": "Upstream houseofcards map with original seed and round limit."
+    },
+    {
+      "id": "jail",
+      "name": "jail",
+      "game_config": {
+        "map": "jail"
+      },
+      "description": "Upstream jail map with original seed and round limit."
+    },
+    {
+      "id": "keepout",
+      "name": "keepout",
+      "game_config": {
+        "map": "keepout"
+      },
+      "description": "Upstream keepout map with original seed and round limit."
+    },
+    {
+      "id": "knifefight",
+      "name": "knifefight",
+      "game_config": {
+        "map": "knifefight"
+      },
+      "description": "Upstream knifefight map with original seed and round limit."
+    },
+    {
+      "id": "krotus",
+      "name": "krotus",
+      "game_config": {
+        "map": "krotus"
+      },
+      "description": "Upstream krotus map with original seed and round limit."
+    },
+    {
+      "id": "learn-your-lesson",
+      "name": "learn_your_lesson",
+      "game_config": {
+        "map": "learn_your_lesson"
+      },
+      "description": "Upstream learn_your_lesson map with original seed and round limit."
+    },
+    {
+      "id": "mercifullattice",
+      "name": "mercifullattice",
+      "game_config": {
+        "map": "mercifullattice"
+      },
+      "description": "Upstream mercifullattice map with original seed and round limit."
+    },
+    {
+      "id": "mincemeat",
+      "name": "mincemeat",
+      "game_config": {
+        "map": "mincemeat"
+      },
+      "description": "Upstream mincemeat map with original seed and round limit."
+    },
+    {
+      "id": "minimaze",
+      "name": "minimaze",
+      "game_config": {
+        "map": "minimaze"
+      },
+      "description": "Upstream minimaze map with original seed and round limit."
+    },
+    {
+      "id": "peaceinourtime",
+      "name": "peaceinourtime",
+      "game_config": {
+        "map": "peaceinourtime"
+      },
+      "description": "Upstream peaceinourtime map with original seed and round limit."
+    },
+    {
+      "id": "pipes",
+      "name": "pipes",
+      "game_config": {
+        "map": "pipes"
+      },
+      "description": "Upstream pipes map with original seed and round limit."
+    },
+    {
+      "id": "popthecork",
+      "name": "popthecork",
+      "game_config": {
+        "map": "popthecork"
+      },
+      "description": "Upstream popthecork map with original seed and round limit."
+    },
+    {
+      "id": "ratsareants",
+      "name": "ratsareants",
+      "game_config": {
+        "map": "ratsareants"
+      },
+      "description": "Upstream ratsareants map with original seed and round limit."
+    },
+    {
+      "id": "rift",
+      "name": "rift",
+      "game_config": {
+        "map": "rift"
+      },
+      "description": "Upstream rift map with original seed and round limit."
+    },
+    {
+      "id": "rose",
+      "name": "rose",
+      "game_config": {
+        "map": "rose"
+      },
+      "description": "Upstream rose map with original seed and round limit."
+    },
+    {
+      "id": "safelycontained",
+      "name": "safelycontained",
+      "game_config": {
+        "map": "safelycontained"
+      },
+      "description": "Upstream safelycontained map with original seed and round limit."
+    },
+    {
+      "id": "seepastyourgreed",
+      "name": "seepastyourgreed",
+      "game_config": {
+        "map": "seepastyourgreed"
+      },
+      "description": "Upstream seepastyourgreed map with original seed and round limit."
+    },
+    {
+      "id": "sittingducks",
+      "name": "sittingducks",
+      "game_config": {
+        "map": "sittingducks"
+      },
+      "description": "Upstream sittingducks map with original seed and round limit."
+    },
+    {
+      "id": "starvation",
+      "name": "starvation",
+      "game_config": {
+        "map": "starvation"
+      },
+      "description": "Upstream starvation map with original seed and round limit."
+    },
+    {
+      "id": "streetsofnewyork",
+      "name": "streetsofnewyork",
+      "game_config": {
+        "map": "streetsofnewyork"
+      },
+      "description": "Upstream streetsofnewyork map with original seed and round limit."
+    },
+    {
+      "id": "sunandmoon",
+      "name": "sunandmoon",
+      "game_config": {
+        "map": "sunandmoon"
+      },
+      "description": "Upstream sunandmoon map with original seed and round limit."
+    },
+    {
+      "id": "superioristhmus",
+      "name": "superioristhmus",
+      "game_config": {
+        "map": "superioristhmus"
+      },
+      "description": "Upstream superioristhmus map with original seed and round limit."
+    },
+    {
+      "id": "t-minus-five-minutes",
+      "name": "t_minus_five_minutes",
+      "game_config": {
+        "map": "t_minus_five_minutes"
+      },
+      "description": "Upstream t_minus_five_minutes map with original seed and round limit."
+    },
+    {
+      "id": "thunderdome",
+      "name": "thunderdome",
+      "game_config": {
+        "map": "thunderdome"
+      },
+      "description": "Upstream thunderdome map with original seed and round limit."
+    },
+    {
+      "id": "tiny",
+      "name": "tiny",
+      "game_config": {
+        "map": "tiny"
+      },
+      "description": "Upstream tiny map with original seed and round limit."
+    },
+    {
+      "id": "toomuchcheese",
+      "name": "toomuchcheese",
+      "game_config": {
+        "map": "toomuchcheese"
+      },
+      "description": "Upstream toomuchcheese map with original seed and round limit."
+    },
+    {
+      "id": "tornadoes",
+      "name": "tornadoes",
+      "game_config": {
+        "map": "tornadoes"
+      },
+      "description": "Upstream tornadoes map with original seed and round limit."
+    },
+    {
+      "id": "trapped",
+      "name": "trapped",
+      "game_config": {
+        "map": "trapped"
+      },
+      "description": "Upstream trapped map with original seed and round limit."
+    },
+    {
+      "id": "ultimatestarvation",
+      "name": "ultimatestarvation",
+      "game_config": {
+        "map": "ultimatestarvation"
+      },
+      "description": "Upstream ultimatestarvation map with original seed and round limit."
+    },
+    {
+      "id": "uneasy-alliance",
+      "name": "uneasy_alliance",
+      "game_config": {
+        "map": "uneasy_alliance"
+      },
+      "description": "Upstream uneasy_alliance map with original seed and round limit."
+    },
+    {
+      "id": "uneruesansfin",
+      "name": "uneruesansfin",
+      "game_config": {
+        "map": "uneruesansfin"
+      },
+      "description": "Upstream uneruesansfin map with original seed and round limit."
+    },
+    {
+      "id": "wallsofparadis",
+      "name": "wallsofparadis",
+      "game_config": {
+        "map": "wallsofparadis"
+      },
+      "description": "Upstream wallsofparadis map with original seed and round limit."
+    },
+    {
+      "id": "whatsthecatdoin",
+      "name": "whatsthecatdoin",
+      "game_config": {
+        "map": "whatsthecatdoin"
+      },
+      "description": "Upstream whatsthecatdoin map with original seed and round limit."
+    },
+    {
+      "id": "where-are-you",
+      "name": "where_are_you",
+      "game_config": {
+        "map": "where_are_you"
+      },
+      "description": "Upstream where_are_you map with original seed and round limit."
+    },
+    {
+      "id": "whereisthecheese",
+      "name": "whereisthecheese",
+      "game_config": {
+        "map": "whereisthecheese"
+      },
+      "description": "Upstream whereisthecheese map with original seed and round limit."
     }
   ],
   "certification": {
