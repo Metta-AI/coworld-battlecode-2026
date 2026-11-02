@@ -137,6 +137,25 @@ ranking, and `do_not_run` when fewer than two real players are present. Keep the
 ladder disabled until hosted certification and an archived-player match pass.
 Deployment IDs and hosted verification evidence are recorded in `docs/deployment.md`.
 
+### Map pool
+
+The manifest template exposes all 74 maps bundled at the Dockerfile's pinned
+Battlecode revision, with one variant per map. `default-small` keeps its existing
+ID. No contestant-specific variants are needed.
+
+`docs/map-pool.json` contains the complete pool for `settings.ladder.scheduler.variant_rotation`.
+Merge that field into the existing settings; do not replace the entire settings
+object with this fragment. Publish and certify the expanded manifest before
+configuring the pool, since every rotation ID must exist in the canonical version.
+
+Paired rotation also requires the platform round-planner change: exhaustive
+`team_pair` rounds keep both side assignments on one map and advance the pool by
+persisted division round number. With a stable roster and pool, each pair visits
+all maps over 74 rounds without increasing episodes per round. Failed rounds may
+leave gaps in completed gameplay; sampled matchup mode does not guarantee coverage.
+Deploy and verify that planner before enabling the full pool. Existing frozen
+round plans remain unchanged on retry.
+
 This repository and the copied scaffold example are distributed under the
 included GPL-3.0 license. Archived players retain their upstream provenance and
 licenses; their implementations are not rewritten here.
